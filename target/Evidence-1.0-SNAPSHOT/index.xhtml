@@ -2,44 +2,127 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
+              integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
     </h:head>
     <h:body>
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <h:form>
-                        <div class="form-group">
-                            <label for="username">UserName</label>
-                            <p:inputText id="username" styleClass="form-control" placeholder="username"></p:inputText>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <p:inputText  type="password" id="password" styleClass="form-control" placeholder="password"></p:inputText>
-                        </div>
-                        <div class="form-group">
-                            <label for="mobile">Contact.No</label>
-                            <p:inputText id="mobile" styleClass="form-control" placeholder="mobile"></p:inputText>
-                        </div>
-                        <p:button value="Submit" ></p:button>
-                        <p:commandButton value="Save" styleClass="btn btn-primary"></p:commandButton>
-                    </h:form>
+                    <fieldset class="border p-3">
+                        <legend>Student Form</legend>
+                        <h:form>
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="id">ID</label>
+                                        <p:inputText value="#{student.id}" id="id" styleClass="form-control" 
+                                                     placeholder="Enter id"></p:inputText>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="username">UserName</label>
+                                        <p:inputText value="#{student.username}" id="username" styleClass="form-control" 
+                                                     placeholder="Enter username"></p:inputText>
+                                    </div>
+                                </div>    
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="password">Password</label>
+                                        <p:inputText  value="#{student.password}" type="password" id="password" styleClass="form-control" 
+                                                      placeholder="Enter password"></p:inputText>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="mobile">Contact.No</label>
+                                        <p:inputText value="#{student.mobile}" id="mobile" styleClass="form-control" 
+                                                     placeholder="Enter mobile number"></p:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <p:selectOneRadio value="#{student.gender}">
+                                    <f:selectItem  itemValue="Male" itemLabel="Male"></f:selectItem>
+                                    <f:selectItem  itemValue="Female" itemLabel="Female"></f:selectItem>
+                                </p:selectOneRadio>
+                            </div>
+                            <div class="form-group">
+                                <label for="skill">Skill</label>
+                                <p:selectManyCheckbox value="#{student.skill}">
+                                    <f:selectItem itemValue="HTML" itemLabel="HTML"></f:selectItem>
+                                    <f:selectItem itemValue="CSS" itemLabel="CSS"></f:selectItem>
+                                    <f:selectItem itemValue="JAVA" itemLabel="JAVA"></f:selectItem>
+                                </p:selectManyCheckbox>
+                            </div>
+                            <div class="form-group">
+                                <label for="courses">Courses</label>
+                                <p:selectOneMenu value="#{student.courses}" id="courses" style="width: 100%">
+                                    <f:selectItem itemValue="J2EE" itemLabel="J2EE"></f:selectItem>
+                                    <f:selectItem itemValue="PHP" itemLabel="PHP"></f:selectItem>
+                                    <f:selectItem itemValue="Graphic" itemLabel="Graphic"></f:selectItem>
+                                    <f:selectItem itemValue="DataBase" itemLabel="DataBase"></f:selectItem>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <p:inputTextarea value="#{student.address}" id="address" styleClass="form-control" 
+                                                 placeholder="Enter your address"></p:inputTextarea>
+                            </div>
+                            <p:commandButton action="#{student.store()}" value="Save" styleClass="btn btn-primary"></p:commandButton>
+                        </h:form>
+                    </fieldset>
                 </div>
-                <div class="col-md-6">
-                    <h:form>
-                        <div class="form-group">
-                            <label for="username">UserName</label>
-                            <p:inputText id="username" styleClass="form-control"></p:inputText>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <p:inputText  type="password" id="password" styleClass="form-control"></p:inputText>
-                        </div>
-                    </h:form>
-                </div>
+            </div>
+            <div class="row mt-5">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">UserName</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Skill</th>
+                            <th scope="col">Courses</th>
+                            <th scope="col">Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col">1</td>
+                            <td scope="col">Habib</td>
+                            <td scope="col">123456</td>
+                            <td scope="col">123456789</td>
+                            <td scope="col">Male</td>
+                            <td scope="col">HTML</td>
+                            <td scope="col">J2EE</td>
+                            <td scope="col">Dhaka</td>
+                            <td scope="row">
+                                <p:commandLink styleClass="btn btn-success mr-2">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" 
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" 
+                                              d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                    </svg>
+                                </p:commandLink>
+                                <p:commandLink styleClass="btn btn-danger mr-2">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" 
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" 
+                                              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                    </svg>
+                                </p:commandLink>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </h:body>
